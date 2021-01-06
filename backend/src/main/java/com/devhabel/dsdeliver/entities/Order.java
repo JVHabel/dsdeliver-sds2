@@ -5,6 +5,7 @@ import java.time.Instant;
 import java.util.HashSet;
 import java.util.Set;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -21,7 +22,7 @@ import lombok.NoArgsConstructor;
 @Data
 @Entity
 @NoArgsConstructor
-@AllArgsConstructor
+
 @Table(name = "tb_order")
 public class Order implements Serializable{
 	private static final long serialVersionUID = 1L;
@@ -29,6 +30,8 @@ public class Order implements Serializable{
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
+	
+	
 	private String address;
 	private Double latitude;
 	private Double longitude;
@@ -41,4 +44,16 @@ public class Order implements Serializable{
 		inverseJoinColumns = @JoinColumn(name = "product_id")
 			)
 	private Set<Product> products = new HashSet<>();
+
+	public Order(Long id, String address, Double latitude, Double longitude, Instant moment, OrderStatus status) {
+		super();
+		this.id = id;
+		this.address = address;
+		this.latitude = latitude;
+		this.longitude = longitude;
+		this.moment = moment;
+		this.status = status;
+	}
+	
+	
 }

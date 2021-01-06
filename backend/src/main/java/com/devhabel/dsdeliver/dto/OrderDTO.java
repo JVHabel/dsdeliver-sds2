@@ -9,12 +9,10 @@ import java.util.stream.Collectors;
 import com.devhabel.dsdeliver.entities.Order;
 import com.devhabel.dsdeliver.entities.OrderStatus;
 
-import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
 @Data
-@AllArgsConstructor
 @NoArgsConstructor
 public class OrderDTO implements Serializable {
 	private static final long serialVersionUID = 1L;
@@ -38,6 +36,15 @@ public class OrderDTO implements Serializable {
 		status = entity.getStatus();
 		products = entity.getProducts().stream()
 				.map(x-> new ProductDTO(x)).collect(Collectors.toList());
+	}
+
+	public OrderDTO(Long id, String address, Double latitude, Double longitude, Instant moment, OrderStatus status) {
+		this.id = id;
+		this.address = address;
+		this.latitude = latitude;
+		this.longitude = longitude;
+		this.moment = moment;
+		this.status = status;
 	}
 	
 	
